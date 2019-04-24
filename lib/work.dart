@@ -6,7 +6,7 @@ class WorkPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(25.0),
       child: Text(
-        'Work',
+        'Under Development',
         style: TextStyle(fontSize: 36.0),
       ),
     );

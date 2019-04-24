@@ -18,15 +18,16 @@ class _HomePage extends State<HomePage> {
   final formKey = GlobalKey<FormState>();
   String email, code;
   BuildContext context;
-  String _selectedCourier = '';
+
   final textControllerCode = TextEditingController();
   final textControllerEmail = TextEditingController();
 
+  String selectedCourier = 'Poslaju';
   @override
   Widget build(BuildContext context) {
     textControllerCode.text = "ER922956035MY";
     this.context = context;
-    this._selectedCourier = Constant.couriers[0];
+
     return Scaffold(
       body: Card(
         margin: EdgeInsets.all(15.0),
@@ -53,11 +54,11 @@ class _HomePage extends State<HomePage> {
                               child: new Text(val),
                             );
                           }).toList(),
-                          hint: Text(_selectedCourier),
+                          value: selectedCourier,
+                          hint: Text(selectedCourier),
                           onChanged: (String val) {
-                            _selectedCourier = val;
                             setState(() {
-                              _selectedCourier = val;
+                              selectedCourier = val;
                             });
                           },
                         ),
@@ -123,9 +124,9 @@ class _HomePage extends State<HomePage> {
   Future submitForm() async {
 
     var courierId = 1;
-    if (Constant.couriers.indexOf(_selectedCourier) == 0) {
+    if (Constant.couriers.indexOf(selectedCourier) == 0) {
       courierId = 1;
-    } else if (Constant.couriers.indexOf(_selectedCourier) == 1) {
+    } else if (Constant.couriers.indexOf(selectedCourier) == 1) {
       courierId = 3;
     }
     
