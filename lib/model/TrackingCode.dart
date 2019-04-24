@@ -30,6 +30,17 @@ class TrackingCode {
     return {'id': id, 'courier_id': courier_id, 'code': code};
   }
 
+  Map<String, dynamic> toJson2() {
+    return {
+      'id': id, 
+      'courier_id': courier_id, 
+      'code': code,
+      'email': email,
+      'last_checked_at': last_checked_at,
+      'completed_at': completed_at,
+    };
+  }
+
   String getCode() {
     return this.code;
   }
@@ -53,4 +64,13 @@ class TrackingCode {
       histories: histories,
     );
   }
+
+  factory TrackingCode.fromMap(Map<String, dynamic> json) => new TrackingCode(
+    id: json['id'],
+    courier_id: json['courier_id'],
+    code: json['code'],
+    email: json['email'],
+    last_checked_at: json['last_checked_at'],
+    completed_at: json['completed_at'],
+  );
 }

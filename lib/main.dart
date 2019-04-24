@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import './home.dart';
-import './work.dart';
-import './wifi.dart';
+import './view/home.dart';
+import './view/work.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +16,6 @@ class MyAppState extends State<MyApp> {
   final _pageOptions = [
     HomePage(),
     WorkPage(),
-    WifiPage(),
   ];
   @override
   Widget build(BuildContext context) {

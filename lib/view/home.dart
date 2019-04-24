@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import './details.dart';
-import './contants/constants.dart';
-import './model/TrackingCode.dart';
+import '../contants/constants.dart';
+import '../model/TrackingCode.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import '../Database.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -142,6 +143,13 @@ class _HomePage extends State<HomePage> {
     
     if (response.statusCode == 200) {
       var trackingCode = parseTrackingCode(response.body);
+
+      DBProvider.db.addTrackingCode(trackingCode);
+      DBProvider.db.getTrackingCode(trackingCode.id)
+      .then((trackingCode) {
+        print(trackingCode.getCode()+ "HEHE");
+      });
+      print("ASD");
       if (trackingCode.getHistories().length == 0) {
         Scaffold.of(context).showSnackBar(
           new SnackBar(content: Text('No transaction found, yet. Please check later.'))

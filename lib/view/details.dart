@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import './model/TrackingCode.dart';
-import './model/TrackingHistory.dart';
+
+import '../model/TrackingHistory.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
-import './contants/constants.dart';
+import '../contants/constants.dart';
+import '../model/TrackingCode.dart';
 
 class Details extends StatefulWidget {
   final String p_code;
