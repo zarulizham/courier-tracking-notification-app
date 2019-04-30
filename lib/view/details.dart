@@ -9,17 +9,17 @@ import '../model/TrackingCode.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class Details extends StatefulWidget {
-  final String p_code;
+  final TrackingCode trackingCode;
 
-  Details(this.p_code);
+  Details(this.trackingCode);
 
   @override
-  _Details createState() => new _Details(this.p_code);
+  _Details createState() => new _Details(this.trackingCode);
 }
 
 class _Details extends State<Details> {
-  _Details(this.p_code);
-  final String p_code;
+  _Details(this.trackingCode);
+  final TrackingCode trackingCode;
   String tracking_code_title = '';
   List<TrackingHistory> trackingHistories = [];
   String url = '';
@@ -45,7 +45,8 @@ class _Details extends State<Details> {
   @override
   void initState() {
     super.initState();
-    url = Constant.appUrl + '/tracking/' + p_code + '/view';
+    url = Constant.appUrl + '/tracking/' + trackingCode.tracking_code_id + '/view';
+    print(url);
     getAllPosts().then((response) {
       trackingHistories = response.getHistories();
       setState(() {

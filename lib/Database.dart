@@ -28,6 +28,7 @@ class DBProvider {
       await db.execute("CREATE TABLE TrackingCode ("
           "id INTEGER PRIMARY KEY,"
           "courier_id INTEGER,"
+          "tracking_code_id TEXT,"
           "code TEXT,"
           "email TEXT,"
           "last_checked_at TEXT,"
@@ -46,9 +47,9 @@ class DBProvider {
     }
 
     var raw = await db.rawInsert(
-        "INSERT Into TrackingCode (id, courier_id, code, email, last_checked_at, completed_at)"
-        " VALUES (?,?,?,?,?,?)",
-        [trackingCode.id, trackingCode.courier_id, trackingCode.code, trackingCode.email, trackingCode.last_checked_at, trackingCode.completed_at]);
+        "INSERT Into TrackingCode (id, courier_id, tracking_code_id, code, email, last_checked_at, completed_at)"
+        " VALUES (?,?,?,?,?,?,?)",
+        [trackingCode.id, trackingCode.courier_id, trackingCode.tracking_code_id, trackingCode.code, trackingCode.email, trackingCode.last_checked_at, trackingCode.completed_at]);
     return raw;
   }
 

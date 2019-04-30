@@ -57,10 +57,11 @@ class _WorkPage extends State<WorkPage> {
     }
   }
 
-  _viewDetails(BuildContext context, String code) {
+  _viewDetails(BuildContext context, TrackingCode trackingCode) {
+    print("ID: " + trackingCode.id.toString());
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Details(code)),
+      MaterialPageRoute(builder: (context) => Details(trackingCode)),
     );
   }
 
@@ -94,7 +95,7 @@ class _WorkPage extends State<WorkPage> {
           ),
           trailing:
               Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-          onTap: () => _viewDetails(context, trackingCodes[index].getCode()),
+          onTap: () => _viewDetails(context, trackingCodes[index]),
         ),
       ),
     );

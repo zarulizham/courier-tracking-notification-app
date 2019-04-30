@@ -28,7 +28,7 @@ class _HomePage extends State<HomePage> {
   String selectedCourier = 'Poslaju';
   @override
   Widget build(BuildContext context) {
-    textControllerCode.text = "ER922956035MY";
+    // textControllerCode.text = "";
     this.context = context;
 
     return Scaffold(
@@ -125,7 +125,17 @@ class _HomePage extends State<HomePage> {
   }
 
   TrackingCode parseTrackingCode(String responseBody) {
-    final parsed = json.decode(responseBody);
+    print(responseBody);
+    var parsed = {};
+    try {
+      parsed = json.decode(responseBody);  
+    } catch (e) {
+      var snackBar = SnackBar(
+          content: Text('Server error. ('+e.toString()+')'));
+      Scaffold.of(context).showSnackBar(snackBar);
+      return null;
+    }
+    
     var trackingCode = parsed['tracking_code']; // working
     TrackingCode tracking = TrackingCode.fromJson(trackingCode); // working
     return tracking;
@@ -156,6 +166,7 @@ class _HomePage extends State<HomePage> {
 
       DBProvider.db.addTrackingCode(trackingCode);
       DBProvider.db.getTrackingCode(trackingCode.id).then((trackingCode) {
+
       });
       if (trackingCode.getHistories().length == 0) {
         Scaffold.of(context).showSnackBar(new SnackBar(
@@ -164,7 +175,7 @@ class _HomePage extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Details(textControllerCode.text)),
+              builder: (context) => Details(trackingCode)),
         );
       }
     } else {

@@ -3,6 +3,7 @@ import './TrackingHistory.dart';
 class TrackingCode {
   int id;
   int courier_id;
+  String tracking_code_id;
   String code;
   String email;
   String last_checked_at;
@@ -12,6 +13,7 @@ class TrackingCode {
   TrackingCode(
       {int id,
       int courier_id,
+      String tracking_code_id,
       String code,
       String email,
       String last_checked_at,
@@ -19,6 +21,7 @@ class TrackingCode {
       List<TrackingHistory> histories}) {
     this.id = id;
     this.courier_id = courier_id;
+    this.tracking_code_id = tracking_code_id;
     this.code = code;
     this.email = email;
     this.last_checked_at = last_checked_at;
@@ -34,6 +37,7 @@ class TrackingCode {
     return {
       'id': id, 
       'courier_id': courier_id, 
+      'tracking_code_id': tracking_code_id,
       'code': code,
       'email': email,
       'last_checked_at': last_checked_at,
@@ -57,6 +61,7 @@ class TrackingCode {
     return TrackingCode(
       id: parsedJson['id'],
       courier_id: parsedJson['courier_id'],
+      tracking_code_id: parsedJson['tracking_code_id'],
       code: parsedJson['code'],
       email: parsedJson['email'],
       last_checked_at: parsedJson['last_checked_at'],
@@ -68,6 +73,7 @@ class TrackingCode {
   factory TrackingCode.fromMap(Map<String, dynamic> json) => new TrackingCode(
     id: json['id'],
     courier_id: json['courier_id'],
+    tracking_code_id: json['tracking_code_id'],
     code: json['code'],
     email: json['email'],
     last_checked_at: json['last_checked_at'],
