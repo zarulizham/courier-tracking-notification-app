@@ -6,6 +6,7 @@ import 'dart:io';
 import 'dart:convert';
 import '../contants/constants.dart';
 import '../model/TrackingCode.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class Details extends StatefulWidget {
   final String p_code;
@@ -22,6 +23,7 @@ class _Details extends State<Details> {
   String tracking_code_title = '';
   List<TrackingHistory> trackingHistories = [];
   String url = '';
+  bool _saving = true;
 
   TrackingCode parseTrackingCode(String responseBody) {
     final parsed = json.decode(responseBody);
@@ -47,6 +49,7 @@ class _Details extends State<Details> {
     getAllPosts().then((response) {
       trackingHistories = response.getHistories();
       setState(() {
+        _saving = false;
         tracking_code_title = response.getCode();
       });
     });
@@ -55,15 +58,22 @@ class _Details extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(tracking_code_title)),
-        body: Container(
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: trackingHistories.length,
-            itemBuilder: _buildProductItem,
+      appBar: AppBar(title: Text(tracking_code_title)),
+      body: ModalProgressHUD(
+          progressIndicator: new CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(
+                Color.fromRGBO(64, 75, 96, .9)),
           ),
-        ));
+          child: Container(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: trackingHistories.length,
+              itemBuilder: _buildProductItem,
+            ),
+          ),
+          inAsyncCall: _saving),
+    );
   }
 
   Widget _buildProductItem(BuildContext context, int index) {

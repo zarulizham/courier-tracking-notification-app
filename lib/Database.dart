@@ -39,7 +39,6 @@ class DBProvider {
   addTrackingCode(TrackingCode trackingCode) async {
     final db = await database;
 
-    print("Starting to add...");
     var track = await db.query("TrackingCode", where: "id = ?", whereArgs: [trackingCode.id]);
 
     if (track.isNotEmpty) {
@@ -50,19 +49,14 @@ class DBProvider {
         "INSERT Into TrackingCode (id, courier_id, code, email, last_checked_at, completed_at)"
         " VALUES (?,?,?,?,?,?)",
         [trackingCode.id, trackingCode.courier_id, trackingCode.code, trackingCode.email, trackingCode.last_checked_at, trackingCode.completed_at]);
-
-    print(raw.toString());
-    print("   End add");
     return raw;
   }
 
   updateTrackingCode(TrackingCode trackingCode) async {
     final db = await database;
-    print("Starting to update...");
     var track = await db.update("TrackingCode", trackingCode.toJson2(),
       where: "id = ?", whereArgs: [trackingCode.id]
     );
-    print("  End update...");
     return track;
   }
 
