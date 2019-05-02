@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "317243990757",
+    "firebase_url": "https://courier-tracking-99a44.firebaseio.com",
+    "project_id": "courier-tracking-99a44",
+    "storage_bucket": "courier-tracking-99a44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317243990757:android:d9bbe5ba88f32c58",
+        "android_client_info": {
+          "package_name": "com.mardyoe.courier.app5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317243990757-5lcpfp90eb8h5g9vvk9f54gh430oifte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyk9TEgFz2akMhUTt3cobKmLxdbS4yuNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317243990757-5lcpfp90eb8h5g9vvk9f54gh430oifte.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "317243990757-qbaklbju96bec5q1kgi76shcj5fq2t3i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mardyoe.courier.app5"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

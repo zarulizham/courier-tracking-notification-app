@@ -1,4 +1,4 @@
-package com.example.my_app;
+package com.mardyoe.courier.app5;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

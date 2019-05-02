@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import '../Database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -21,6 +22,7 @@ class _HomePage extends State<HomePage> {
   String email, code;
   BuildContext context;
   bool _saving = false;
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   final textControllerCode = TextEditingController();
   final textControllerEmail = TextEditingController();
@@ -172,6 +174,7 @@ class _HomePage extends State<HomePage> {
         Scaffold.of(context).showSnackBar(new SnackBar(
             content: Text('No transaction found, yet. Please check later.')));
       } else {
+        _firebaseMessaging.subscribeToTopic(trackingCode.getCode());
         Navigator.push(
           context,
           MaterialPageRoute(
