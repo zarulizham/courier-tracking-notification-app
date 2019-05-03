@@ -24,6 +24,7 @@ class _Details extends State<Details> {
   List<TrackingHistory> trackingHistories = [];
   String url = '';
   bool _saving = true;
+  String _textNotFound = '';
 
   TrackingCode parseTrackingCode(String responseBody) {
     final parsed = json.decode(responseBody);
@@ -37,21 +38,29 @@ class _Details extends State<Details> {
       url,
       headers: {HttpHeaders.acceptHeader: "application/json"},
     );
+    print(response.body);
     return parseTrackingCode(response.body);
   }
-
-  var users = new List<TrackingCode>();
 
   @override
   void initState() {
     super.initState();
-    url = Constant.appUrl + '/tracking/' + trackingCode.tracking_code_id + '/view';
+    url = Constant.appUrl +
+        '/tracking/' +
+        trackingCode.tracking_code_id +
+        '/view';
     print(url);
     getAllPosts().then((response) {
       trackingHistories = response.getHistories();
       setState(() {
         _saving = false;
         tracking_code_title = response.getCode();
+        if (trackingHistories.length == 0) {
+          _textNotFound =
+              'There is no record found. We will update you once there is any update';
+        } else {
+          _textNotFound = '';
+        }
       });
     });
   }
@@ -60,20 +69,42 @@ class _Details extends State<Details> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(tracking_code_title)),
-      body: ModalProgressHUD(
-          progressIndicator: new CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(
-                Color.fromRGBO(64, 75, 96, .9)),
-          ),
-          child: Container(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: trackingHistories.length,
-              itemBuilder: _buildProductItem,
-            ),
-          ),
-          inAsyncCall: _saving),
+      body: _modalProgress(),
+    );
+  }
+
+  _modalProgress() {
+    return ModalProgressHUD(
+        progressIndicator: new CircularProgressIndicator(
+          valueColor:
+              new AlwaysStoppedAnimation<Color>(Color.fromRGBO(64, 75, 96, .9)),
+        ),
+        child: Container(
+          child: trackingHistories.length > 0
+              ? _listView()
+              : Center(child: _notFound()),
+        ),
+        inAsyncCall: _saving);
+  }
+
+  Widget _listView() {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: trackingHistories.length,
+      itemBuilder: _buildProductItem,
+    );
+  }
+
+  Widget _notFound() {
+    return new Container(
+      padding: EdgeInsets.only(left: 50, right: 50),
+      child: Text(
+        _textNotFound,
+        style: TextStyle(
+            fontFamily: 'NovaMono', color: Colors.black, fontSize: 20.0),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 
@@ -110,8 +141,6 @@ class _Details extends State<Details> {
             trackingHistories[index].getDescription(),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
           subtitle: Row(
             children: <Widget>[
               Icon(Icons.linear_scale, color: Colors.yellowAccent),

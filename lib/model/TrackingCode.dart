@@ -60,7 +60,7 @@ class TrackingCode {
         
     return TrackingCode(
       id: parsedJson['id'],
-      courier_id: parsedJson['courier_id'],
+      courier_id: int.parse(parsedJson['courier_id'].toString()),
       tracking_code_id: parsedJson['tracking_code_id'],
       code: parsedJson['code'],
       email: parsedJson['email'],

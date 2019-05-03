@@ -12,6 +12,7 @@ class WorkPage extends StatefulWidget {
 class _WorkPage extends State<WorkPage> {
   List<TrackingHistory> trackingHistories;
   List<TrackingCode> trackingCodes = [];
+  String _notFoundText = '';
 
   @override
   void initState() {
@@ -20,6 +21,12 @@ class _WorkPage extends State<WorkPage> {
     DBProvider.db.getAllTrackingCodes().then((trackingCodes) {
       setState(() {
         this.trackingCodes = trackingCodes;
+        if (trackingCodes.length == 0) {
+          _notFoundText =
+              'There is no tracking found. \nStart tracking and view your tracking here!';
+        } else {
+          _notFoundText = '';
+        }
       });
     });
   }
@@ -40,7 +47,7 @@ class _WorkPage extends State<WorkPage> {
 
   _notFound() {
     return new Text(
-      'There is no tracking found. \nStart tracking and view your tracking here!',
+      _notFoundText,
       style: TextStyle(
           fontFamily: 'NovaMono', color: Colors.black, fontSize: 20.0),
       textAlign: TextAlign.center,
