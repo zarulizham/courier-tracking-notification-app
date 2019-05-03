@@ -1,4 +1,5 @@
 import './TrackingHistory.dart';
+import 'package:flutter/material.dart';
 
 class TrackingCode {
   int id;
@@ -79,4 +80,12 @@ class TrackingCode {
     last_checked_at: json['last_checked_at'],
     completed_at: json['completed_at'],
   );
+
+  Widget getLogo() {
+    if (this.courier_id == 1) {
+      return Image.asset('assets/images/poslaju.png', width: 70.0,);
+    } else if (this.courier_id == 3) {
+      return Image.asset('assets/images/skynet.png', width: 70.0,);
+    }
+  }
 }

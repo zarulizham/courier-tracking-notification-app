@@ -89,11 +89,7 @@ class _WorkPage extends State<WorkPage> {
                           new BorderSide(width: 1.0, color: Colors.white24))),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    _getCourier(trackingCodes[index].courier_id),
-                    style:
-                        TextStyle(fontFamily: 'NovaMono', color: Colors.white),
-                  ),
+                  trackingCodes[index].getLogo(),
                 ],
               )),
           title: Text(
