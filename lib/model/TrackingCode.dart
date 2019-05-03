@@ -88,4 +88,12 @@ class TrackingCode {
       return Image.asset('assets/images/skynet.png', width: 70.0,);
     }
   }
+
+  String getLogoName() {
+    if (this.courier_id == 1) {
+      return 'poslaju.png';
+    } else if (this.courier_id == 3) {
+      return 'skynet.png';
+    }
+  }
 }

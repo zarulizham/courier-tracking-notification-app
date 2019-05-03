@@ -68,7 +68,33 @@ class _Details extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(tracking_code_title)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.0),
+        child: AppBar(
+          title: new Column(
+            children: <Widget>[
+              Image.asset(
+                'assets/images/' + trackingCode.getLogoName(),
+                height: 40.0,
+              ),
+            ],
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(75.0),
+            child: new Container(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Text(
+                tracking_code_title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17.0,
+                    letterSpacing: 5.0,
+                    fontFamily: 'NovaMono'),
+              ),
+            ),
+          ),
+        ),
+      ),
       body: _modalProgress(),
     );
   }

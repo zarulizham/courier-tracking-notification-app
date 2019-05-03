@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../model/TrackingHistory.dart';
 import '../model/TrackingCode.dart';
 import '../Database.dart';
@@ -46,11 +47,14 @@ class _WorkPage extends State<WorkPage> {
   }
 
   _notFound() {
-    return new Text(
-      _notFoundText,
-      style: TextStyle(
-          fontFamily: 'NovaMono', color: Colors.black, fontSize: 20.0),
-      textAlign: TextAlign.center,
+    return new Container(
+      padding: EdgeInsets.only(left: 50, right: 50),
+      child: new Text(
+        _notFoundText,
+        style: TextStyle(
+            fontFamily: 'NovaMono', color: Colors.black, fontSize: 20.0),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 
@@ -82,19 +86,36 @@ class _WorkPage extends State<WorkPage> {
           contentPadding:
               EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           leading: Container(
-              padding: EdgeInsets.only(right: 12.0),
-              decoration: new BoxDecoration(
-                  border: new Border(
-                      right:
-                          new BorderSide(width: 1.0, color: Colors.white24))),
-              child: Column(
-                children: <Widget>[
-                  trackingCodes[index].getLogo(),
-                ],
-              )),
-          title: Text(
-            trackingCodes[index].getCode(),
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            padding: EdgeInsets.only(right: 12.0),
+            decoration: new BoxDecoration(
+                border: new Border(
+                    right: new BorderSide(width: 1.0, color: Colors.white24))),
+            child: Column(
+              children: <Widget>[
+                trackingCodes[index].getLogo(),
+              ],
+            ),
+          ),
+          title: new Container(
+            child: new GestureDetector(
+              child: Text(
+                trackingCodes[index].getCode(),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              onLongPress: () {
+                Clipboard.setData(
+                  new ClipboardData(
+                    text: trackingCodes[index].getCode(),
+                  ),
+                );
+                Scaffold.of(context).showSnackBar(
+                  new SnackBar(
+                    content: new Text("Copied to Clipboard"),
+                  ),
+                );
+              },
+            ),
           ),
           trailing:
               Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
