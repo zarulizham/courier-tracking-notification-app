@@ -86,6 +86,8 @@ class TrackingCode {
       return Image.asset('assets/images/poslaju.png', width: 70.0,);
     } else if (this.courier_id == 3) {
       return Image.asset('assets/images/skynet.png', width: 70.0,);
+    } else if (this.courier_id == 4) {
+      return Image.asset('assets/images/ninjavan.png', width: 70.0,);
     }
   }
 
@@ -94,6 +96,8 @@ class TrackingCode {
       return 'poslaju.png';
     } else if (this.courier_id == 3) {
       return 'skynet.png';
+    } else if (this.courier_id == 4) {
+      return 'ninjavan.png';
     }
   }
 }

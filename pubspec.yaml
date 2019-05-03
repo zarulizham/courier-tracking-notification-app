@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/images/skynet.png
     - assets/images/poslaju.png
+    - assets/images/ninjavan.png
   fonts:
     - family: NovaMono
       fonts:

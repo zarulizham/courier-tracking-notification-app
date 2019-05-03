@@ -149,6 +149,8 @@ class _HomePage extends State<HomePage> {
       courierId = 1;
     } else if (Constant.couriers.indexOf(selectedCourier) == 1) {
       courierId = 3;
+    } else if (Constant.couriers.indexOf(selectedCourier) == 2) {
+      courierId = 4;
     }
 
     final response = await http.post(Constant.appUrl + '/api/submit', headers: {
