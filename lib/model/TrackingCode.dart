@@ -100,4 +100,8 @@ class TrackingCode {
       return 'ninjavan.png';
     }
   }
+
+  bool isCompleted() {
+    return this.completed_at == null ? false : true;
+  }
 }

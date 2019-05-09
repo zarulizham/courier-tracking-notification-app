@@ -69,7 +69,7 @@ class DBProvider {
 
   Future<List<TrackingCode>> getAllTrackingCodes() async {
     final db = await database;
-    var res = await db.query("TrackingCode");
+    var res = await db.query("TrackingCode", orderBy: "id DESC");
 
     List<TrackingCode> list =
         res.isNotEmpty ? res.map((c) => TrackingCode.fromMap(c)).toList() : [];

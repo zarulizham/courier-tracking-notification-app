@@ -77,6 +77,11 @@ class _WorkPage extends State<WorkPage> {
   }
 
   Widget _buildProductItem(BuildContext context, int index) {
+    var status = Icon(IconData(57746, fontFamily: 'MaterialIcons'), color: Colors.blue, size: 15,);
+    if (trackingCodes[index].isCompleted()) {
+      status = Icon(IconData(59693, fontFamily: 'MaterialIcons'), color: Colors.green, size: 15,);
+    }
+
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -98,10 +103,17 @@ class _WorkPage extends State<WorkPage> {
           ),
           title: new Container(
             child: new GestureDetector(
-              child: Text(
-                trackingCodes[index].getCode(),
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              child: Row(
+                children: <Widget>[
+                  status,
+                  SizedBox(width: 5,),
+                  Text(
+                    trackingCodes[index].getCode(),
+                    style:
+                        TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  
+                ],
               ),
               onLongPress: () {
                 Clipboard.setData(
