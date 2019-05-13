@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Database.dart';
 import '../model/TrackingHistory.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -38,7 +39,10 @@ class _Details extends State<Details> {
       url,
       headers: {HttpHeaders.acceptHeader: "application/json"},
     );
-    print(response.body);
+
+    if (response.statusCode == 404) {
+      return response;
+    }
     return parseTrackingCode(response.body);
   }
 
@@ -49,17 +53,17 @@ class _Details extends State<Details> {
         '/tracking/' +
         trackingCode.tracking_code_id +
         '/view';
-    print(url);
     getAllPosts().then((response) {
-      trackingHistories = response.getHistories();
       setState(() {
         _saving = false;
-        tracking_code_title = response.getCode();
-        if (trackingHistories.length == 0) {
+        if (response is TrackingCode) {
+          tracking_code_title = response.getCode();
+          DBProvider.db.addTrackingCode(response);
+          trackingHistories = response.getHistories();
+          _textNotFound = '';
+        } else {
           _textNotFound =
               'There is no record found. We will update you once there is any update';
-        } else {
-          _textNotFound = '';
         }
       });
     });

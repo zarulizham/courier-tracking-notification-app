@@ -127,7 +127,6 @@ class _HomePage extends State<HomePage> {
   }
 
   TrackingCode parseTrackingCode(String responseBody) {
-    print(responseBody);
     var parsed = {};
     try {
       parsed = json.decode(responseBody);  

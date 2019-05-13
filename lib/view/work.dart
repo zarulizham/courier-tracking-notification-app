@@ -69,7 +69,6 @@ class _WorkPage extends State<WorkPage> {
   }
 
   _viewDetails(BuildContext context, TrackingCode trackingCode) {
-    print("ID: " + trackingCode.id.toString());
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Details(trackingCode)),
@@ -77,11 +76,6 @@ class _WorkPage extends State<WorkPage> {
   }
 
   Widget _buildProductItem(BuildContext context, int index) {
-    var status = Icon(IconData(57746, fontFamily: 'MaterialIcons'), color: Colors.blue, size: 15,);
-    if (trackingCodes[index].isCompleted()) {
-      status = Icon(IconData(59693, fontFamily: 'MaterialIcons'), color: Colors.green, size: 15,);
-    }
-
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -96,6 +90,7 @@ class _WorkPage extends State<WorkPage> {
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white24))),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 trackingCodes[index].getLogo(),
               ],
@@ -105,12 +100,11 @@ class _WorkPage extends State<WorkPage> {
             child: new GestureDetector(
               child: Row(
                 children: <Widget>[
-                  status,
-                  SizedBox(width: 5,),
                   Text(
                     trackingCodes[index].getCode(),
+                    overflow: TextOverflow.clip,
                     style:
-                        TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        TextStyle(color: trackingCodes[index].completed_at == null ? Colors.orange : Colors.white, fontWeight: FontWeight.bold),
                   ),
                   
                 ],

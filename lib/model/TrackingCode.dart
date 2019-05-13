@@ -55,6 +55,7 @@ class TrackingCode {
   }
 
   factory TrackingCode.fromJson(Map<String, dynamic> parsedJson) {
+
     var list = parsedJson['histories'] as List;
     List<TrackingHistory> histories =
         list.map((i) => TrackingHistory.fromJson(i)).toList();
