@@ -68,7 +68,7 @@ class MyAppState extends State<MyApp> {
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Courier Tracking Notification'),
+            title: Text('Courier Notify'),
           ),
           body: _pageOptions[_selectedPage],
           bottomNavigationBar: BottomNavigationBar(

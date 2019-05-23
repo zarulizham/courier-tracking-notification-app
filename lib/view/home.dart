@@ -36,83 +36,85 @@ class _HomePage extends State<HomePage> {
     return Scaffold(
       body: ModalProgressHUD(
         progressIndicator: new CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color.fromRGBO(64, 75, 96, .9)),),
-        child: Card(
-          margin: EdgeInsets.all(15.0),
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                        padding: EdgeInsets.only(
-                            left: 10.0, right: 5.0, top: 4.0, bottom: 4.0),
-                        decoration: new BoxDecoration(
-                          border:
-                              new Border.all(color: Colors.black54, width: 1),
-                          borderRadius: new BorderRadius.circular(4.0),
-                        ),
-                        width: double.infinity,
-                        child: DropdownButtonHideUnderline(
-                          child: new DropdownButton<String>(
-                            items: Constant.couriers.map((String val) {
-                              return DropdownMenuItem<String>(
-                                value: val,
-                                child: new Text(val),
-                              );
-                            }).toList(),
-                            value: selectedCourier,
-                            hint: Text(selectedCourier),
-                            onChanged: (String val) {
-                              setState(() {
-                                selectedCourier = val;
-                              });
-                            },
+        child: SingleChildScrollView(
+                  child: Card(
+            margin: EdgeInsets.all(15.0),
+            child: Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                          padding: EdgeInsets.only(
+                              left: 10.0, right: 5.0, top: 4.0, bottom: 4.0),
+                          decoration: new BoxDecoration(
+                            border:
+                                new Border.all(color: Colors.black54, width: 1),
+                            borderRadius: new BorderRadius.circular(4.0),
                           ),
-                        )),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                        bottom: 10,
+                          width: double.infinity,
+                          child: DropdownButtonHideUnderline(
+                            child: new DropdownButton<String>(
+                              items: Constant.couriers.map((String val) {
+                                return DropdownMenuItem<String>(
+                                  value: val,
+                                  child: new Text(val),
+                                );
+                              }).toList(),
+                              value: selectedCourier,
+                              hint: Text(selectedCourier),
+                              onChanged: (String val) {
+                                setState(() {
+                                  selectedCourier = val;
+                                });
+                              },
+                            ),
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 10,
+                          bottom: 10,
+                        ),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Eg: ER922956035MY",
+                            labelText: "Tracking Code",
+                            border: OutlineInputBorder(),
+                          ),
+                          textCapitalization: TextCapitalization.characters,
+                          controller: textControllerCode,
+                        ),
                       ),
-                      child: TextFormField(
+                      TextFormField(
                         decoration: InputDecoration(
-                          hintText: "Eg: ER922956035MY",
-                          labelText: "Tracking Code",
+                          hintText: "Eg: ali@example.com",
+                          labelText: "Email Address",
+                          helperText: "We will send you an update",
                           border: OutlineInputBorder(),
                         ),
-                        textCapitalization: TextCapitalization.characters,
-                        controller: textControllerCode,
+                        controller: textControllerEmail,
                       ),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "Eg: ali@example.com",
-                        labelText: "Email Address",
-                        helperText: "We will send you an update",
-                        border: OutlineInputBorder(),
-                      ),
-                      controller: textControllerEmail,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: RaisedButton(
-                            onPressed: () {
-                              check();
-                            },
-                            child: Text("Track!"),
-                            color: Color.fromRGBO(58, 66, 86, 1.0),
-                            textColor: Colors.white,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RaisedButton(
+                              onPressed: () {
+                                check();
+                              },
+                              child: Text("Track!"),
+                              color: Color.fromRGBO(58, 66, 86, 1.0),
+                              textColor: Colors.white,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )),
+            ),
           ),
         ), inAsyncCall: _saving),
        

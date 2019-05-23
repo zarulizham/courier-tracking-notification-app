@@ -75,13 +75,13 @@ class _Details extends State<Details> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
         child: AppBar(
-          title: new Column(
-            children: <Widget>[
-              Image.asset(
+          title: Container(
+            padding: EdgeInsets.only(right: 50),
+            alignment: Alignment.center,
+            child: Image.asset(
                 'assets/images/' + trackingCode.getLogoName(),
                 height: 40.0,
               ),
-            ],
           ),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(75.0),
