@@ -64,6 +64,7 @@ class MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          fontFamily: 'Quicksand',
           primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
         ),
         home: Scaffold(

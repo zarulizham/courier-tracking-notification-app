@@ -82,6 +82,16 @@ flutter:
     - family: NovaMono
       fonts:
         - asset: fonts/NovaMono.ttf
+    - family: Quicksand
+      fonts:
+        - asset: fonts/Quicksand-Light.ttf
+          weight: 300
+        - asset: fonts/Quicksand-Regular.ttf
+          weight: 400
+        - asset: fonts/Quicksand-Medium.ttf
+          weight: 500
+        - asset: fonts/Quicksand-Bold.ttf
+          weight: 700
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
