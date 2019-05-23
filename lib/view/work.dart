@@ -58,16 +58,6 @@ class _WorkPage extends State<WorkPage> {
     );
   }
 
-  String _getCourier(int id) {
-    if (id == 1) {
-      return 'Poslaju';
-    } else if (id == 3) {
-      return 'Skynet';
-    } else {
-      return 'N/A';
-    }
-  }
-
   _viewDetails(BuildContext context, TrackingCode trackingCode) {
     Navigator.push(
       context,

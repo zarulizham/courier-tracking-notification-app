@@ -25,22 +25,26 @@ class DBProvider {
     String path = join(documentsDirectory.path, "TestDB.db");
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE TrackingCode ("
-          "id INTEGER PRIMARY KEY,"
-          "courier_id INTEGER,"
-          "tracking_code_id TEXT,"
-          "code TEXT,"
-          "email TEXT,"
-          "last_checked_at TEXT,"
-          "completed_at TEXT"
-          ")");
+          if (version == 1) {
+            await db.execute("CREATE TABLE TrackingCode ("
+              "id INTEGER PRIMARY KEY,"
+              "courier_id INTEGER,"
+              "tracking_code_id TEXT,"
+              "code TEXT,"
+              "email TEXT,"
+              "last_checked_at TEXT,"
+              "completed_at TEXT"
+              ")");
+          }
+      
     });
   }
 
   addTrackingCode(TrackingCode trackingCode) async {
     final db = await database;
 
-    var track = await db.query("TrackingCode", where: "id = ?", whereArgs: [trackingCode.id]);
+    var track = await db
+        .query("TrackingCode", where: "id = ?", whereArgs: [trackingCode.id]);
 
     if (track.isNotEmpty) {
       return updateTrackingCode(trackingCode);
@@ -49,15 +53,22 @@ class DBProvider {
     var raw = await db.rawInsert(
         "INSERT Into TrackingCode (id, courier_id, tracking_code_id, code, email, last_checked_at, completed_at)"
         " VALUES (?,?,?,?,?,?,?)",
-        [trackingCode.id, trackingCode.courier_id, trackingCode.tracking_code_id, trackingCode.code, trackingCode.email, trackingCode.last_checked_at, trackingCode.completed_at]);
+        [
+          trackingCode.id,
+          trackingCode.courier_id,
+          trackingCode.tracking_code_id,
+          trackingCode.code,
+          trackingCode.email,
+          trackingCode.last_checked_at,
+          trackingCode.completed_at
+        ]);
     return raw;
   }
 
   updateTrackingCode(TrackingCode trackingCode) async {
     final db = await database;
     var track = await db.update("TrackingCode", trackingCode.toJson2(),
-      where: "id = ?", whereArgs: [trackingCode.id]
-    );
+        where: "id = ?", whereArgs: [trackingCode.id]);
     return track;
   }
 

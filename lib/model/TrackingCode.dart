@@ -82,23 +82,27 @@ class TrackingCode {
     completed_at: json['completed_at'],
   );
 
-  Widget getLogo() {
+  getLogo() {
     if (this.courier_id == 1) {
       return Image.asset('assets/images/poslaju.png', width: 70.0,);
     } else if (this.courier_id == 3) {
       return Image.asset('assets/images/skynet.png', width: 70.0,);
     } else if (this.courier_id == 4) {
       return Image.asset('assets/images/ninjavan.png', width: 70.0,);
+    } else if (this.courier_id == 5) {
+      return Image.asset('assets/images/jnt.png', width: 70.0,);
     }
   }
 
-  String getLogoName() {
+  getLogoName() {
     if (this.courier_id == 1) {
       return 'poslaju.png';
     } else if (this.courier_id == 3) {
       return 'skynet.png';
     } else if (this.courier_id == 4) {
       return 'ninjavan.png';
+    } else if (this.courier_id == 5) {
+      return 'jnt.png';
     }
   }
 

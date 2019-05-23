@@ -139,6 +139,23 @@ class _Details extends State<Details> {
   }
 
   Widget _buildProductItem(BuildContext context, int index) {
+    Widget city = new Container(width: 0, height: 0);
+    if (trackingCode.courier_id == 5) {
+      city = Text(trackingHistories[index].getCity(), style: TextStyle(color: Colors.white));
+    }
+
+    Widget event = new Container(width: 0, height: 0,);
+    if (trackingCode.courier_id != 4) {
+      event = Row(
+        children: <Widget>[
+          Icon(Icons.linear_scale, color: Colors.yellowAccent),
+          Text(trackingHistories[index].getEvent(),
+
+              style: TextStyle(color: Colors.white))
+        ],
+      );
+    }
+
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -154,6 +171,7 @@ class _Details extends State<Details> {
                       right:
                           new BorderSide(width: 1.0, color: Colors.white24))),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     trackingHistories[index].getHistoryTime(),
@@ -171,11 +189,11 @@ class _Details extends State<Details> {
             trackingHistories[index].getDescription(),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          subtitle: Row(
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Icon(Icons.linear_scale, color: Colors.yellowAccent),
-              Text(trackingHistories[index].getEvent(),
-                  style: TextStyle(color: Colors.white))
+              event,
+              city,
             ],
           ),
         ),
