@@ -187,10 +187,16 @@ class _HomePage extends State<HomePage> {
         );
       }
     } else {
+      var errorMessage;
+      if (response.statusCode == 400) {
+        var jsonRes = json.decode(response.body);
+        errorMessage = jsonRes['message'];
+      } else {
+        errorMessage = 'Failed to retrieve data (Status Code: ' + response.statusCode.toString() + ')';
+      }
       var snackBar = SnackBar(
-          content: Text('Failed to retrieve data (Status Code: ' +
-              response.statusCode.toString() +
-              ')'));
+        backgroundColor: Colors.red,
+          content: Text(errorMessage));
       Scaffold.of(context).showSnackBar(snackBar);
     }
   }
