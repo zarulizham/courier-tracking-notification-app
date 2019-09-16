@@ -6,6 +6,7 @@ class TrackingCode {
   int courier_id;
   String tracking_code_id;
   String code;
+  String description;
   String email;
   String last_checked_at;
   String completed_at;
@@ -16,6 +17,7 @@ class TrackingCode {
       int courier_id,
       String tracking_code_id,
       String code,
+      String description,
       String email,
       String last_checked_at,
       String completed_at,
@@ -24,6 +26,7 @@ class TrackingCode {
     this.courier_id = courier_id;
     this.tracking_code_id = tracking_code_id;
     this.code = code;
+    this.description = description;
     this.email = email;
     this.last_checked_at = last_checked_at;
     this.completed_at = completed_at;
@@ -77,6 +80,7 @@ class TrackingCode {
     courier_id: json['courier_id'],
     tracking_code_id: json['tracking_code_id'],
     code: json['code'],
+    description: json['description'],
     email: json['email'],
     last_checked_at: json['last_checked_at'],
     completed_at: json['completed_at'],

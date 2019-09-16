@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.1+4
+version: 1.0.3+8
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -28,8 +28,9 @@ dependencies:
   sqflite: 1.1.5
   path_provider: 1.1.0
   modal_progress_hud: ^0.1.3
-  firebase_messaging: ^5.0.1+1
+  firebase_messaging: ^5.1.5
   flutter_launcher_icons: ^0.7.1
+  flutter_slidable: ^0.5.3
 
 #dependency_overrides:
 #  image: 2.0.7
@@ -78,6 +79,8 @@ flutter:
     - assets/images/poslaju.png
     - assets/images/ninjavan.png
     - assets/images/jnt.png
+    - assets/images/add-list.png
+    - assets/images/no-tracking-found.png
   fonts:
     - family: NovaMono
       fonts:
@@ -92,6 +95,9 @@ flutter:
           weight: 500
         - asset: fonts/Quicksand-Bold.ttf
           weight: 700
+    - family: Satisfy
+      fonts:
+        - asset: fonts/Satisfy-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

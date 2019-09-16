@@ -10,6 +10,7 @@ class DBProvider {
   DBProvider._();
 
   static final DBProvider db = DBProvider._();
+  static final int currentVersion = 2;
 
   Database _database;
 
@@ -23,9 +24,9 @@ class DBProvider {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "TestDB.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {},
+    return await openDatabase(path, version: currentVersion, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-          if (version == 1) {
+          if (version <= currentVersion) {
             await db.execute("CREATE TABLE TrackingCode ("
               "id INTEGER PRIMARY KEY,"
               "courier_id INTEGER,"
@@ -36,11 +37,15 @@ class DBProvider {
               "completed_at TEXT"
               ")");
           }
+
+          if (version <= currentVersion) {
+            await db.execute("ALTER TABLE TrackingCode ADD COLUMN description TEXT;");
+          }
       
     });
   }
 
-  addTrackingCode(TrackingCode trackingCode) async {
+  addTrackingCode(TrackingCode trackingCode, {description}) async {
     final db = await database;
 
     var track = await db
@@ -51,8 +56,8 @@ class DBProvider {
     }
 
     var raw = await db.rawInsert(
-        "INSERT Into TrackingCode (id, courier_id, tracking_code_id, code, email, last_checked_at, completed_at)"
-        " VALUES (?,?,?,?,?,?,?)",
+        "INSERT Into TrackingCode (id, courier_id, tracking_code_id, code, email, last_checked_at, completed_at, description)"
+        " VALUES (?,?,?,?,?,?,?,?)",
         [
           trackingCode.id,
           trackingCode.courier_id,
@@ -60,7 +65,8 @@ class DBProvider {
           trackingCode.code,
           trackingCode.email,
           trackingCode.last_checked_at,
-          trackingCode.completed_at
+          trackingCode.completed_at,
+          description,
         ]);
     return raw;
   }
@@ -87,7 +93,7 @@ class DBProvider {
     return list;
   }
 
-  deleteClient(int id) async {
+  deleteTracking(int id) async {
     final db = await database;
     return db.delete("TrackingCode", where: "id = ?", whereArgs: [id]);
   }
