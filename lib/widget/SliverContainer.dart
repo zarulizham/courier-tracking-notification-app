@@ -68,12 +68,21 @@ class SliverFabState extends State<SliverContainer> {
     }
 
     return new Positioned(
-      top: top,
+      top: top-5,
       // right: widget.marginRight,,
-      child: new Transform(
-        transform: new Matrix4.identity()..scale(scale, scale),
-        alignment: Alignment.bottomCenter,
-        child: widget.floatingActionButton,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 80,
+            color: Colors.orange,
+          ),
+          new Transform(
+            transform: new Matrix4.identity()..scale(scale, scale),
+            alignment: Alignment.bottomCenter,
+            child: widget.floatingActionButton,
+          ),
+        ],
       ),
     );
   }

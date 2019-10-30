@@ -114,6 +114,9 @@ class MyAppState extends State<MyApp> {
                 height: 120,
                 width: MediaQuery.of(context).size.width,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                   elevation: 4,
                   child: Container(
                     child: Row(
@@ -164,14 +167,7 @@ class MyAppState extends State<MyApp> {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    color: Colors.orange,
-                    height: 80,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    // color: Colors.red,
-                    height: 50,
+                    height: 130,
                   ),
                 ),
                 SliverList(
@@ -247,10 +243,7 @@ class MyAppState extends State<MyApp> {
                               : Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      trackingCodes[index].description ?? "",
-                      style: TextStyle(color: Colors.white, fontSize: 9),
-                    )
+                    description(trackingCodes[index].description),
                   ],
                 ),
                 onLongPress: () {
@@ -325,5 +318,15 @@ class MyAppState extends State<MyApp> {
         }
       });
     });
+  }
+
+  Widget description(description) {
+    if (description == '' || description == null) {
+      return Container();
+    }
+    return Text(
+      description,
+      style: TextStyle(color: Colors.white, fontSize: 9),
+    );
   }
 }

@@ -6,5 +6,5 @@ export "FLUTTER_TARGET=/Users/zarulizham/flutter-app/courier_notify/lib/main.dar
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"
 export "FLUTTER_FRAMEWORK_DIR=/Users/zarulizham/flutter/bin/cache/artifacts/engine/ios"
-export "FLUTTER_BUILD_NAME=1.0.3"
-export "FLUTTER_BUILD_NUMBER=8"
+export "FLUTTER_BUILD_NAME=1.0.4"
+export "FLUTTER_BUILD_NUMBER=11"
